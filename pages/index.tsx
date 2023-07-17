@@ -1,9 +1,13 @@
-import type { NextPage } from 'next'
+import type { NextPage } from "next";
+import { Layout } from "../shared/components/Layout";
+import { MortgageCaclulationForm } from "../features/mortgageCaculationForm/MortgageCaclulationForm";
 
 const Home: NextPage = () => {
   return (
-    <div>Hello!</div>
-  )
-}
+    <Layout>
+      <MortgageCaclulationForm />
+    </Layout>
+  );
+};
 
-export default Home
+export default Home;

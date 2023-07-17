@@ -1,12 +1,12 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-type Data = {
+export type Data = {
   monthlyPayment?: string;
   error?: string;
 }
 
-type MortgageParams = {
+export type MortgageParams = {
   principal: number;
   annualInterestRate: number;
   termOfLoan: number; 
@@ -18,8 +18,9 @@ export default function handler(
 ) {
     if(req.method === 'POST'){
       const {principal, annualInterestRate, termOfLoan} = req.query;
-      const values = calculatePayment({principal: parseInt(principal.toString()), annualInterestRate:parseInt(annualInterestRate.toString()), termOfLoan:parseInt(termOfLoan.toString())});
+      const values = calculatePayment({ principal: Number(principal), annualInterestRate: Number(annualInterestRate), termOfLoan: Number(termOfLoan) });
       setTimeout(() => {
+        
         if (values !== "NaN") res.status(200).json({ monthlyPayment: values });
         else
           res
@@ -41,4 +42,4 @@ function calculatePayment({principal, annualInterestRate, termOfLoan}:MortgagePa
     const payment = monthlyPayment.toFixed(2);
 
     return payment;
-} 
+}  
